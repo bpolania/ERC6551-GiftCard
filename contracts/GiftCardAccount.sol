@@ -58,15 +58,7 @@ contract GiftCardAccount is IERC165, IERC1271, IERC6551Account {
         require(chainId == block.chainid, "Wrong chainID");
         return IERC721(tokenContract).ownerOf(tokenId);
     }
-
-    function gift(address to) public {
-        (uint256 chainId, address tokenContract, uint256 tokenId) = this.token();
-        IERC721 erc721 = IERC721(tokenContract);
-        require(chainId == block.chainid, "Wrong chainID");
-        require(msg.sender == erc721.ownerOf(tokenId), "Caller not owner");
-        erc721.safeTransferFrom(msg.sender, to, tokenId);
-    }
-
+    
     function supportsInterface(bytes4 interfaceId) public pure returns (bool) {
         return (interfaceId == type(IERC165).interfaceId ||
             interfaceId == type(IERC6551Account).interfaceId);

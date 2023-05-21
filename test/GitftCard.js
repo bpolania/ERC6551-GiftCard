@@ -1,13 +1,12 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
-const simpleERC6551AccountContractABI = require('../contracts/abis/IERC655Account.json');
 const giftCardAccountContractABI = require('../contracts/abis/GiftCardAccount.json');
 
 describe("ERC6551Registry", function () {
   let ERC6551Registry, GiftCardAccount, owner, addr1, addr2;
   let giftCardAccount, erc6551Registry;
-  let tokenId;
-  let chainId, salt, deployedAccountTx, deployedAccountReceipt, deployedAccountAddress;
+  let tokenId, chainId, salt
+  let deployedAccountTx, deployedAccountReceipt, deployedAccountAddress;
 
   beforeEach(async function () {
     [owner, addr1, addr2] = await ethers.getSigners();
@@ -34,6 +33,7 @@ describe("ERC6551Registry", function () {
 
     expect(deployedAccountReceipt.events[0].event).to.equal('AccountCreated');
     deployedAccountAddress = deployedAccountReceipt.events[0].args[0];
+  
     expect(await ethers.provider.getCode(deployedAccountAddress)).not.to.equal('0x');
   });
 
@@ -73,13 +73,18 @@ describe("ERC6551Registry", function () {
       expect(finalBalance).to.equal(initialBalance.add(ethers.utils.parseEther("1.0")));
     });
 
-    it("Should gift the giftcard", async function () {
-      // approve transfer
-      const tx = await giftCard.connect(addr1).setApprovalForAll(deployedAccountAddress, true);
+    it("Should mint & gift a giftcard", async function () {
+      const tokenURI = "https://chocolate-objective-giraffe-337.mypinata.cloud/ipfs/Qmefgi96NSNCJFrUHWuPH67Y6kuk8KMayb9vZGgzVYLNtg?_gl=1*1isypq3*rs_ga*MTc4MjMzNjM0NC4xNjg0NTc2MTI4*rs_ga_5RMPXG14TE*MTY4NDU3NjEyOC4xLjEuMTY4NDU3NjE3MS4xNy4wLjA.";
+      let amount = ethers.utils.parseEther("1.0");
+      // Mint a new gift card
+      const mintTx = await giftCard.mint(addr1.address, tokenURI, {value: amount});
+      const receipt = await mintTx.wait();
+      const tokenId = receipt.events[0].args.tokenId;
+      const tx = await giftCard.connect(addr1).setApprovalForAll(await giftCard.address, true);
       await tx.wait();
-
-      await mockGiftCardAccount.connect(addr1).gift(addr2.address);
-      expect(await mockGiftCardAccount.owner()).to.equal(addr2.address);
+      // Gift the card
+      await giftCard.connect(addr1).gift(addr2.address);
+      expect(await giftCard.ownerOf(tokenId)).to.be.equal(addr2.address);
     });
   });
 });

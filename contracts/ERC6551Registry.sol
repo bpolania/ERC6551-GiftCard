@@ -57,6 +57,17 @@ contract ERC6551Registry is IERC6551Registry {
         return code;
     }
 
+    function test(address implementation,
+        uint256 chainId,
+        address tokenContract,
+        uint256 tokenId,
+        uint256 salt) public pure returns(address, uint256,
+        address,
+        uint256,
+        uint256){
+        return(implementation, chainId, tokenContract, tokenId, salt);
+    }
+
     function account(
         address implementation,
         uint256 chainId,
