@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "@0xsequence/sstore2": "github:0xsequence/sstore2",
-    "@openzeppelin/contracts": "^4.8.3"
+    "@openzeppelin/contracts": "^4.8.3",
+    "dotenv": "^16.0.3"
   }
 }

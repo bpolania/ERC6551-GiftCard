@@ -77,6 +77,10 @@ In this repo you will find two approaches.
 
 ## Run the code
 
+* The code is configured to be deployed in Aurora Testnet. You can find a faucet [here](https://aurora.dev/faucet)
+
+* You need to setup a `.env` file with the `AURORA_PRIVATE_KEY` variable and assign it your private key. You can use the `sample.env`, just rename it to `.env` and change the values.
+
 ### Install
 
 ```shell
@@ -90,8 +94,14 @@ npx hardhat test
 ```
 
 ### Deploy
+
+#### Deploy Contracts for the GitfCard Approach
 ```shell
-npx hardhat run scripts/deploy.js
+npx hardhat run --network testnet deployGifCard.js
+```
+#### Deploy Contracts for the GitfCardExtended Approach
+```shell
+npx hardhat run --network testnet deployGifCardExtended.js
 ```
 
 ## Todos
