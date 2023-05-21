@@ -97,11 +97,11 @@ npx hardhat test
 
 #### Deploy Contracts for the GitfCard Approach
 ```shell
-npx hardhat run --network testnet deployGifCard.js
+npx hardhat run --network testnet_aurora scripts/deployGiftCard.js
 ```
 #### Deploy Contracts for the GitfCardExtended Approach
 ```shell
-npx hardhat run --network testnet deployGifCardExtended.js
+npx hardhat run --network testnet_aurora ./scripts/deployGiftCardExtended.js
 ```
 
 ## Todos

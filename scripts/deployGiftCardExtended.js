@@ -10,6 +10,7 @@ async function main() {
   GiftCard = await ethers.getContractFactory("GiftCardExtended");
   giftCard = await GiftCard.deploy();
   await giftCard.deployed();  
+  console.log("GiftCard contract deployed at:", giftCard.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

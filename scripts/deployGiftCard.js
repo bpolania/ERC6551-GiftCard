@@ -18,6 +18,10 @@ async function main() {
   ERC6551Registry = await ethers.getContractFactory("ERC6551Registry");
   erc6551Registry = await ERC6551Registry.deploy();
   await erc6551Registry.deployed();
+
+  console.log("GiftCard contract deployed at:", giftCard.address);
+  console.log("GiftCardAccount contract deployed at:", GiftCardAccount.address);
+  console.log("erc6551Registry contract deployed at:", erc6551Registry.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
