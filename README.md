@@ -87,6 +87,12 @@ In this repo you will find two approaches.
 npm install
 ```
 
+### Compile
+
+```shell
+npx hardhat compile
+```
+
 ### Test
 
 ```shell
