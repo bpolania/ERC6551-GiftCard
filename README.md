@@ -94,9 +94,14 @@ npx hardhat test
 npx hardhat run scripts/deploy.js
 ```
 
+## Todos
+
+* Create `GiftCardLibrary.sol` and move some functions such as `generateRandomSalt` and `nonce`
+* Create interfaces for the gift card contracts
+
 ## Disclaimer
 
-This code is for educational purposes so it is not audited. Use it wisely!
+This code is for educational purposes, requires upgrades and improvements and, of course, it is not audited. So, use it wisely!
 
 Enjoy!
 

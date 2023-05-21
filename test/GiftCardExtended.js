@@ -3,7 +3,7 @@ const { ethers } = require("hardhat");
 const giftCardAccountContractABI = require('../contracts/abis/GiftCardAccount.json');
 
 describe("GiftCard", function () {
-  let owner, addr1, addr2, GiftCard, giftCard, giftCardAccount;
+  let owner, addr1, addr2, GiftCard, giftCard;
 
   beforeEach(async function () {
     [owner, addr1, addr2] = await ethers.getSigners();
@@ -68,4 +68,3 @@ describe("GiftCard", function () {
     });
   });
 });
-
